@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE tiles-definitions PUBLIC  
+      "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+      "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- Base Define -->
+	<definition name="mainLayout"
+		template="/WEB-INF/views/base/main-layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/include/header.jsp" />
+		<put-attribute name="banner" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/include/footer.jsp" />
+	</definition>
+
+	<!-- Home Page -->
+	<definition name="home" extends="mainLayout">
+		<put-attribute name="title" value="Home Page" />
+		<put-attribute name="banner"
+			value="/WEB-INF/views/include/banner.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/home.jsp" />
+	</definition>
+
+	<!-- About Page -->
+	<definition name="about" extends="mainLayout">
+		<put-attribute name="title" value="About" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/about.jsp" />
+	</definition>
+
+	<!-- Service Page -->
+	<definition name="service" extends="mainLayout">
+		<put-attribute name="title" value="Service" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/service.jsp" />
+	</definition>
+
+	<!-- Shop Now Page -->
+	<definition name="product" extends="mainLayout">
+		<put-attribute name="title" value="Product" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/product.jsp" />
+	</definition>
+
+	<!-- Contact Page -->
+	<definition name="cotact" extends="mainLayout">
+		<put-attribute name="title" value="Product" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/contact.jsp" />
+	</definition>
+	
+	
+
+</tiles-definitions>
