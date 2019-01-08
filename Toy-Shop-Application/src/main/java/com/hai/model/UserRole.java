@@ -29,7 +29,7 @@ public class UserRole {
 	private Role role;
 	
 	//Map to User
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="User_ID",nullable=false)
 	private Users user;
 	

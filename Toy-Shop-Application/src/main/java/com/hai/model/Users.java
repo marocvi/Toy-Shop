@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,14 +48,14 @@ public class Users {
 
 	// Map to Comment
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Comments> comments;
+	private List<Review> review;
 
 	// Map to Whishlist
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Wishlist> wishlists;
 
 	// Map to Cart
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Cart cart;
 
 	// Map to Order
@@ -167,14 +166,6 @@ public class Users {
 		this.roles = roles;
 	}
 
-	public List<Comments> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comments> comments) {
-		this.comments = comments;
-	}
-
 	public List<Wishlist> getWishlists() {
 		return wishlists;
 	}
@@ -182,8 +173,6 @@ public class Users {
 	public void setWishlists(List<Wishlist> wishlists) {
 		this.wishlists = wishlists;
 	}
-
-	
 
 	public Cart getCart() {
 		return cart;
@@ -227,6 +216,14 @@ public class Users {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public List<Review> getReview() {
+		return review;
+	}
+
+	public void setReview(List<Review> review) {
+		this.review = review;
 	}
 
 	public enum LoginStatus {

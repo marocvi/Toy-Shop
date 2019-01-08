@@ -61,7 +61,7 @@ public class Product {
 	private List<Supplier> suppliers;
 
 	// Map to List
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Price> prices;
 
 	// Map to wishlist
@@ -84,9 +84,9 @@ public class Product {
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<ImportDetail> importDetails;
 
-	// Map to Comment
+	// Map to Review
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "product")
-	private List<Comments> comments;
+	private List<Review> review;
 
 	// Getter and setter
 	public List<ExportDetail> getExportDetails() {
@@ -209,13 +209,7 @@ public class Product {
 		this.profileImage = profileImage;
 	}
 
-	public List<Comments> getComments() {
-		return comments;
-	}
 
-	public void setComments(List<Comments> comments) {
-		this.comments = comments;
-	}
 
 	public String getBrand() {
 		return brand;
@@ -263,6 +257,15 @@ public class Product {
 	public void setRate(int rate) {
 		this.rate = rate;
 	}
+
+	public List<Review> getReview() {
+		return review;
+	}
+
+	public void setReview(List<Review> review) {
+		this.review = review;
+	}
+	
 
 
 }

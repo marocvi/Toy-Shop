@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,8 +24,6 @@ public class Cart {
 	private int id  ;
 	@Column(name = "Money_Total")
 	private double moneyTotal;
-	@Column(name = "Amount_Total")
-	private int amountTotal;
 	
 
 	
@@ -36,7 +33,7 @@ public class Cart {
 	private Users user;
 	
 	//Map to Cart_Detail
-	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL,fetch=FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL,orphanRemoval=true)
 	private List<CartDetail > cartDetails ;
 
 
@@ -64,13 +61,6 @@ public class Cart {
 		this.moneyTotal = moneyTotal;
 	}
 
-	public int getAmountTotal() {
-		return amountTotal;
-	}
-
-	public void setAmountTotal(int amountTotal) {
-		this.amountTotal = amountTotal;
-	}
 
 	
 	public Users getUser() {
