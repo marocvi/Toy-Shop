@@ -73,7 +73,7 @@ public class DeliveryReportDAOImpl implements IDeliveryReportDAO{
 		LOGGER.info("Call delete DeliveryReport");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<DeliveryReport> query = sessionFactory.getCurrentSession().createQuery("delete from DeliveryReport where deliveryReportID=:deliveryReportID");
+			Query<DeliveryReport> query = sessionFactory.getCurrentSession().createQuery("delete from DeliveryReport where id=:deliveryReportID");
 			query.setParameter("deliveryReportID", deliveryReportID);
 			query.executeUpdate();
 			return true;

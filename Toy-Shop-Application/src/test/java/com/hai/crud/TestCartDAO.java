@@ -18,7 +18,7 @@ import com.hai.model.Cart;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes= {SpringContextConfig.class})
 @WebAppConfiguration
-public class TestCart {
+public class TestCartDAO {
 	
 	@Autowired
 	ICartDAO cartDAO ;
@@ -46,9 +46,14 @@ public class TestCart {
 		assertEquals(2, cartDAO.readAllCarts().size());;
 	}
 	
-	@Test
+//	@Test
 	public void testFindByProperty(){
 		assertEquals(1, cartDAO.readCartByProperty("moneyTotal",12.0).size());
+	}
+	
+	@Test
+	public void testDeleteCart() {
+		assertTrue(cartDAO.deleteCart(1));
 	}
 	
 }

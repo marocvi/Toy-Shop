@@ -73,7 +73,7 @@ public class UserDAOImpl implements IUserDAO{
 		LOGGER.info("Call delete Users");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Users> query = sessionFactory.getCurrentSession().createQuery("delete from Users where userID=:userID");
+			Query<Users> query = sessionFactory.getCurrentSession().createQuery("delete from Users where id=:userID");
 			query.setParameter("userID", userID);
 			query.executeUpdate();
 			return true;

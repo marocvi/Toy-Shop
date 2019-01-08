@@ -73,7 +73,7 @@ public class OrderDAOImpl implements IOrderDAO{
 		LOGGER.info("Call delete Order");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Order> query = sessionFactory.getCurrentSession().createQuery("delete from Order where orderID=:orderID");
+			Query<Order> query = sessionFactory.getCurrentSession().createQuery("delete from Order where id=:orderID");
 			query.setParameter("orderID", orderID);
 			query.executeUpdate();
 			return true;

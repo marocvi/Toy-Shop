@@ -73,7 +73,7 @@ public class CategoryDAOImpl implements ICategoryDAO{
 		LOGGER.info("Call delete Category");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Category> query = sessionFactory.getCurrentSession().createQuery("delete from Category where categoryID=:categoryID");
+			Query<Category> query = sessionFactory.getCurrentSession().createQuery("delete from Category where id=:categoryID");
 			query.setParameter("categoryID", categoryID);
 			query.executeUpdate();
 			return true;

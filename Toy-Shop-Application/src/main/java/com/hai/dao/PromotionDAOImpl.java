@@ -73,7 +73,7 @@ public class PromotionDAOImpl implements IPromotionDAO{
 		LOGGER.info("Call delete Promotion");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Promotion> query = sessionFactory.getCurrentSession().createQuery("delete from Promotion where promotionID=:promotionID");
+			Query<Promotion> query = sessionFactory.getCurrentSession().createQuery("delete from Promotion where id=:promotionID");
 			query.setParameter("promotionID", promotionID);
 			query.executeUpdate();
 			return true;

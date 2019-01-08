@@ -73,7 +73,7 @@ public class CartDAOImpl implements ICartDAO{
 		LOGGER.info("Call delete Cart");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Cart> query = sessionFactory.getCurrentSession().createQuery("delete from Cart where cartID=:cartID");
+			Query<Cart> query = sessionFactory.getCurrentSession().createQuery("delete from Cart where id=:cartID");
 			query.setParameter("cartID", cartID);
 			query.executeUpdate();
 			return true;

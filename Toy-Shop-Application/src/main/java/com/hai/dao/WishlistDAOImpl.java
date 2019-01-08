@@ -73,7 +73,7 @@ public class WishlistDAOImpl implements IWishlistDAO{
 		LOGGER.info("Call delete Wishlist");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Wishlist> query = sessionFactory.getCurrentSession().createQuery("delete from Wishlist where wishlistID=:wishlistID");
+			Query<Wishlist> query = sessionFactory.getCurrentSession().createQuery("delete from Wishlist where id=:wishlistID");
 			query.setParameter("wishlistID", wishlistID);
 			query.executeUpdate();
 			return true;

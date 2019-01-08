@@ -73,7 +73,7 @@ public class ProductDAOImpl implements IProductDAO{
 		LOGGER.info("Call delete Product");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Product> query = sessionFactory.getCurrentSession().createQuery("delete from Product where productID=:productID");
+			Query<Product> query = sessionFactory.getCurrentSession().createQuery("delete from Product where id=:productID");
 			query.setParameter("productID", productID);
 			query.executeUpdate();
 			return true;

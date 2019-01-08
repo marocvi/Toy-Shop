@@ -73,7 +73,7 @@ public class PaymentDAOImpl implements IPaymentDAO{
 		LOGGER.info("Call delete Payment");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Payment> query = sessionFactory.getCurrentSession().createQuery("delete from Payment where paymentID=:paymentID");
+			Query<Payment> query = sessionFactory.getCurrentSession().createQuery("delete from Payment where id=:paymentID");
 			query.setParameter("paymentID", paymentID);
 			query.executeUpdate();
 			return true;

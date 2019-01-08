@@ -73,7 +73,7 @@ public class SupplierDAOImpl implements ISupplierDAO{
 		LOGGER.info("Call delete Supplier");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Supplier> query = sessionFactory.getCurrentSession().createQuery("delete from Supplier where supplierID=:supplierID");
+			Query<Supplier> query = sessionFactory.getCurrentSession().createQuery("delete from Supplier where id=:supplierID");
 			query.setParameter("supplierID", supplierID);
 			query.executeUpdate();
 			return true;

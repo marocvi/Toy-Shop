@@ -73,7 +73,7 @@ public class SpecialOfferDAOImpl implements ISpecialOfferDAO{
 		LOGGER.info("Call delete SpecialOffer");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<SpecialOffer> query = sessionFactory.getCurrentSession().createQuery("delete from SpecialOffer where specialOfferID=:specialOfferID");
+			Query<SpecialOffer> query = sessionFactory.getCurrentSession().createQuery("delete from SpecialOffer where id=:specialOfferID");
 			query.setParameter("specialOfferID", specialOfferID);
 			query.executeUpdate();
 			return true;

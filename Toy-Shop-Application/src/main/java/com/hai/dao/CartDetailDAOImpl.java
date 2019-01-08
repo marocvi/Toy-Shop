@@ -73,7 +73,7 @@ public class CartDetailDAOImpl implements ICartDetailDAO{
 		LOGGER.info("Call delete CartDetail");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<CartDetail> query = sessionFactory.getCurrentSession().createQuery("delete from CartDetail where cartDetailID=:cartDetailID");
+			Query<CartDetail> query = sessionFactory.getCurrentSession().createQuery("delete from CartDetail where id=:cartDetailID");
 			query.setParameter("cartDetailID", cartDetailID);
 			query.executeUpdate();
 			return true;

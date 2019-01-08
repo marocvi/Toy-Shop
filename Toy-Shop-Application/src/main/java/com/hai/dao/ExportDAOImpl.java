@@ -73,7 +73,7 @@ public class ExportDAOImpl implements IExportDAO{
 		LOGGER.info("Call delete Export");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Export> query = sessionFactory.getCurrentSession().createQuery("delete from Export where exportID=:exportID");
+			Query<Export> query = sessionFactory.getCurrentSession().createQuery("delete from Export where id=:exportID");
 			query.setParameter("exportID", exportID);
 			query.executeUpdate();
 			return true;

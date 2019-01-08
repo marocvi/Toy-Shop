@@ -73,7 +73,7 @@ public class DeliveryLocationDAOImpl implements IDeliveryLocationDAO{
 		LOGGER.info("Call delete DeliveryLocation");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<DeliveryLocation> query = sessionFactory.getCurrentSession().createQuery("delete from DeliveryLocation where deliveryLocationID=:deliveryLocationID");
+			Query<DeliveryLocation> query = sessionFactory.getCurrentSession().createQuery("delete from DeliveryLocation where id=:deliveryLocationID");
 			query.setParameter("deliveryLocationID", deliveryLocationID);
 			query.executeUpdate();
 			return true;

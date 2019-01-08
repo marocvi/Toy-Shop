@@ -73,7 +73,7 @@ public class ReviewDAOImpl implements IReviewDAO{
 		LOGGER.info("Call delete Review");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Review> query = sessionFactory.getCurrentSession().createQuery("delete from Review where reviewID=:reviewID");
+			Query<Review> query = sessionFactory.getCurrentSession().createQuery("delete from Review where id=:reviewID");
 			query.setParameter("reviewID", reviewID);
 			query.executeUpdate();
 			return true;

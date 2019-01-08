@@ -73,7 +73,7 @@ public class PriceDAOImpl implements IPriceDAO{
 		LOGGER.info("Call delete Price");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Price> query = sessionFactory.getCurrentSession().createQuery("delete from Price where priceID=:priceID");
+			Query<Price> query = sessionFactory.getCurrentSession().createQuery("delete from Price where id=:priceID");
 			query.setParameter("priceID", priceID);
 			query.executeUpdate();
 			return true;

@@ -73,7 +73,7 @@ public class ImportDAOImpl implements IImportDAO{
 		LOGGER.info("Call delete Import");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Import> query = sessionFactory.getCurrentSession().createQuery("delete from Import where importsID=:importsID");
+			Query<Import> query = sessionFactory.getCurrentSession().createQuery("delete from Import where id=:importsID");
 			query.setParameter("importsID", importsID);
 			query.executeUpdate();
 			return true;

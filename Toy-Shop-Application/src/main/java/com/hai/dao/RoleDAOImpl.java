@@ -73,7 +73,7 @@ public class RoleDAOImpl implements IRoleDAO{
 		LOGGER.info("Call delete Role");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Role> query = sessionFactory.getCurrentSession().createQuery("delete from Role where roleID=:roleID");
+			Query<Role> query = sessionFactory.getCurrentSession().createQuery("delete from Role where id=:roleID");
 			query.setParameter("roleID", roleID);
 			query.executeUpdate();
 			return true;

@@ -73,7 +73,7 @@ public class UserRoleDAOImpl implements IUserRoleDAO{
 		LOGGER.info("Call delete UserRole");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<UserRole> query = sessionFactory.getCurrentSession().createQuery("delete from UserRole where userRoleID=:userRoleID");
+			Query<UserRole> query = sessionFactory.getCurrentSession().createQuery("delete from UserRole where id=:userRoleID");
 			query.setParameter("userRoleID", userRoleID);
 			query.executeUpdate();
 			return true;
