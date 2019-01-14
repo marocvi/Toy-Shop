@@ -6,12 +6,12 @@ public class ToyShopApplicationInitializer extends AbstractAnnotationConfigDispa
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] {RootConfig.class };
+		return new Class<?>[] {SpringSecurityContextConfig.class};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class<?>[] {SpringContextConfig.class};
+		return new Class<?>[] {SpringWebContextConfig.class};
 	}
 
 	@Override

@@ -3,6 +3,9 @@ package com.hai.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -14,7 +17,9 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages="com.hai")
-public class SpringContextConfig extends WebMvcConfigurerAdapter {
+@PropertySource("classpath:datasource.properties")
+@Import(value= {HibernateConfig.class})
+public class SpringWebContextConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public ViewResolver getViewResolver() {
@@ -28,6 +33,13 @@ public class SpringContextConfig extends WebMvcConfigurerAdapter {
 		tileConfigurer.setDefinitions("/WEB-INF/config/tile/config-tile.xml");
 		return tileConfigurer;
 	}
+	// Configure encoder
+	@Bean
+	public BCryptPasswordEncoder getBCryptEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -35,9 +47,9 @@ public class SpringContextConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/theme/");
 	}
 	
+	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		
 		configurer.enable();
 	}
 	

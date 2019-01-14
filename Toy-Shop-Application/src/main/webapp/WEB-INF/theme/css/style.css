@@ -357,7 +357,7 @@ h5#exampleModalLabel {
 }
 
 a {
-    color: #fff;
+    color: #0000ff;
     text-decoration: none;
 }
 
@@ -1182,6 +1182,19 @@ footer {
     -moz-opacity: 0;
     filter: alpha(opacity=0);
 }
+/*Custom */
+/*Display error of form*/
+.error{
+    margin:0 auto;
+    font-size:13px;
+    color:red;
+
+
+}
+
+
+
+
 
 /*-- //to-top --*/
 

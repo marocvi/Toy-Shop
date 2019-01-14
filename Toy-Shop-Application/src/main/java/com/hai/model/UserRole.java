@@ -18,6 +18,10 @@ import javax.persistence.TemporalType;
 @Table(name="User_Role")
 public class UserRole {
 	
+	/**
+	 * 
+	 */
+
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="User_Role_ID")
 	@Id

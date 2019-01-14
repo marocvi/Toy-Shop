@@ -11,19 +11,19 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.hai.config.SpringContextConfig;
+import com.hai.config.SpringWebContextConfig;
 import com.hai.idao.ICartDAO;
 import com.hai.model.Cart;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= {SpringContextConfig.class})
+@ContextConfiguration(classes= {SpringWebContextConfig.class})
 @WebAppConfiguration
 public class TestCartDAO {
 	
 	@Autowired
 	ICartDAO cartDAO ;
 	 
-//	@Test
+	@Test
 	public void testCreate() {
 		Cart cart = new Cart();
 		cart.setMoneyTotal(14);
@@ -51,7 +51,7 @@ public class TestCartDAO {
 		assertEquals(1, cartDAO.readCartByProperty("moneyTotal",12.0).size());
 	}
 	
-	@Test
+//	@Test
 	public void testDeleteCart() {
 		assertTrue(cartDAO.deleteCart(1));
 	}

@@ -7,7 +7,7 @@
 		</layout>
 	</appender>
 	<logger name = "com.apress.logging.log4j" additivity = "false">
-		<level value="debug"/>
+		<level value="info"/>
 		<appender-ref ref="dataAcessLogger"/>
 	</logger>
 	<root>

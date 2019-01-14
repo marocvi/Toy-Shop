@@ -10,15 +10,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.security.core.GrantedAuthority;
+
 
 @Entity
-public class Role {
+public class Role implements GrantedAuthority {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="Role_Id")
 	private int id;
-	private String role;
+	private String roleName;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
 	private List<UserRole> users;
 	
@@ -29,17 +35,23 @@ public class Role {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getRole() {
-		return role;
+	
+	public String getRoleName() {
+		return roleName;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 	public List<UserRole> getUsers() {
 		return users;
 	}
 	public void setUsers(List<UserRole> users) {
 		this.users = users;
+	}
+	@Override
+	public String getAuthority() {
+		// TODO Auto-generated method stub
+		return this.roleName;
 	}
 	
 	

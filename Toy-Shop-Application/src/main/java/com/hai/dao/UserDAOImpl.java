@@ -122,6 +122,25 @@ public class UserDAOImpl implements IUserDAO{
 		}
 	}
 
+	@Override
+	@Transactional
+	public Users readByEmail(String email) {
+		LOGGER.info("Call ready  Users by Email");
+		try {
+			@SuppressWarnings("unchecked")
+			Query<Users> query = sessionFactory.getCurrentSession().createQuery("delete from Users where email=:email");
+			query.setParameter("email", email);
+			return query.getSingleResult();
+		}
+		catch (Exception e) {
+			LOGGER.error("Can't delete Users");
+			return null;
+		}
+	}
+
+
+	
+
 		
 	
 }

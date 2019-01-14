@@ -18,5 +18,7 @@ public interface IUserDAO {
 	public boolean deleteUsers(int userID);
 	public List<Users> readAllUserss();
 	public List<Users> readUsersByProperty(String name, Object value);
+	public Users readByEmail(String email);
+	
 	
 }

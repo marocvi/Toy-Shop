@@ -33,15 +33,16 @@ public class Users {
 	private String firstName;
 	@Column(name = "Last_Name")
 	private String lastName;
-	@Column(name = "Verify_ID")
-	private String verifyID;
-
 	@Column(name = "create_Date")
 	private Date createDate;
 	@Column(name = "Login_Status")
 	private String loginStatus;
 	private String token;
 
+	//Map to verify Token
+	@OneToMany(mappedBy="user")
+	private List<VerifyAccountToken> verifyAccountTokens;
+	
 	// Map to User Role
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<UserRole> roles;
@@ -202,14 +203,6 @@ public class Users {
 		this.lastName = lastName;
 	}
 
-	public String getVerifyID() {
-		return verifyID;
-	}
-
-	public void setVerifyID(String verifyID) {
-		this.verifyID = verifyID;
-	}
-
 	public String getToken() {
 		return token;
 	}
@@ -225,9 +218,22 @@ public class Users {
 	public void setReview(List<Review> review) {
 		this.review = review;
 	}
+	
+
+	public List<VerifyAccountToken> getVerifyAccountTokens() {
+		return verifyAccountTokens;
+	}
+
+	public void setVerifyAccountTokens(List<VerifyAccountToken> verifyAccountTokens) {
+		this.verifyAccountTokens = verifyAccountTokens;
+	}
+
 
 	public enum LoginStatus {
 		ACTIVE, PENDING, BAN, CLOSE
 	}
+	
+	
+
 
 }

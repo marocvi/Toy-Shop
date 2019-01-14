@@ -27,7 +27,7 @@
 	}
 </script>
 <!-- Add favicon -->
-<link href="${image}/favicon.ico" rel="shortcut icon" >
+<link href="${image}/favicon.ico" rel="shortcut icon">
 <!--//meta tags ends here-->
 <!--booststrap-->
 <link href="${css}/bootstrap.min.css" rel="stylesheet" type="text/css"
@@ -36,6 +36,8 @@
 <!-- font-awesome icons -->
 <link href="${css}/fontawesome-all.min.css" rel="stylesheet"
 	type="text/css" media="all">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- //font-awesome icons -->
 <!-- For Clients slider -->
 <link rel="stylesheet" href="${css}/flexslider.css" type="text/css"
@@ -66,9 +68,14 @@
 
 
 
+
+
+
 	<!--js working-->
 	<script src='${js}/jquery-2.2.3.min.js'></script>
 	<!--//js working-->
+
+	</script>
 	<!-- cart-js -->
 	<script src="${js}/minicart.js"></script>
 	<script>
@@ -109,6 +116,9 @@
 		});
 	</script>
 	<!--// responsiveslides banner-->
+
+
+
 	<!--slider flexisel -->
 	<script src="${js}/jquery.flexisel.js"></script>
 	<script>
@@ -173,5 +183,19 @@
 	<!--bootstrap working-->
 	<script src="${js}/bootstrap.min.js"></script>
 	<!-- //bootstrap working-->
+	<script>
+	$(window).bind("load", function() { 
+		
+	
+		if(${verifyError!=null}){
+			alert("${verifyError}");
+		}
+		else if(${verifySucess!=null}){
+			alert("${verifySucess}")
+		}
+	
+	})
+		
+	</script>
 </body>
 </html>

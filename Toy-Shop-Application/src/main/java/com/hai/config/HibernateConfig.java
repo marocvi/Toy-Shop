@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -20,7 +19,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan(basePackages = "com.hai.model")
 @EnableTransactionManagement
-@PropertySource("classpath:datasource.properties")
 public class HibernateConfig {
 	private final Logger LOGGER = Logger.getLogger(HibernateConfig.class);
 	@Value("${hibernate.connection.url}")
