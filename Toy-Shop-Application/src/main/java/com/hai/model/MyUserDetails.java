@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.hai.model.Users.LoginStatus;
+
 public class MyUserDetails implements UserDetails{
 	
 	/**
@@ -26,7 +28,7 @@ public class MyUserDetails implements UserDetails{
 		for (UserRole userRole : userRoles) {
 			roles.add(userRole.getRole());
 		}
-		return roles;
+		return null;
 	}
 
 	@Override
@@ -48,9 +50,9 @@ public class MyUserDetails implements UserDetails{
 
 	@Override
 	public boolean isAccountNonLocked() {
-		if(user.getLoginStatus().equals("BAN"))
-				return false;
-		return true;
+		if(user.getLoginStatus().equals(LoginStatus.ACTIVE.toString()))
+				return true;
+		return false;
 	}
 
 	@Override

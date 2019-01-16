@@ -34,7 +34,7 @@
 							<li><span class="far fa-heart"></span></li>
 							<li>
 								<button type="button" data-toggle="modal"
-									data-target="#exampleModal">
+									data-target="#exampleModal" id="user">
 									<span class="far fa-user"></span>
 								</button>
 							</li>

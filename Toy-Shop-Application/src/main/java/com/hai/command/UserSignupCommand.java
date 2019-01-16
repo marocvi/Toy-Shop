@@ -9,7 +9,7 @@ import com.hai.validation.CheckExistEmail;
 import com.hai.validation.FieldMatch;
 
 @FieldMatch(field="password",fieldMatch="retypePassword")
-public class UserCommand {
+public class UserSignupCommand {
 	
 
 	@NotEmpty(message= "{firstName.notEmpty}")
@@ -23,7 +23,9 @@ public class UserCommand {
 	@CheckExistEmail(message = "{email.checkExistEmail}")
 	private String email;
 	@Size(message ="{password.size}")
+	@NotEmpty
 	private String password;
+	@NotEmpty
 	private String retypePassword;
 	
 	//Getter and setter

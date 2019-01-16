@@ -11,12 +11,6 @@ public class HomeController {
 
 	@RequestMapping(value = {"/","home"}, method=RequestMethod.GET)
 	public String getHome(Model model) {
-		if(model.containsAttribute("verifyError")) {
-			System.out.println("error");
-		}
-		else {
-			System.out.println("No error");
-		}
 		return "home";
 	}
 }

@@ -1191,6 +1191,15 @@ footer {
 
 
 }
+/*Display sucess of form*/
+.sucess{
+    margin:0 auto;
+    font-size:13px;
+    color:green;
+
+
+}
+
 
 
 

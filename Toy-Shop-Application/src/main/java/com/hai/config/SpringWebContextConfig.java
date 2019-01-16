@@ -5,7 +5,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -33,11 +32,7 @@ public class SpringWebContextConfig extends WebMvcConfigurerAdapter {
 		tileConfigurer.setDefinitions("/WEB-INF/config/tile/config-tile.xml");
 		return tileConfigurer;
 	}
-	// Configure encoder
-	@Bean
-	public BCryptPasswordEncoder getBCryptEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+
 	
 	
 	

@@ -1,6 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <section class="subscribe">
 	<div class="container-fluid">
 		<div class="row">
@@ -81,8 +83,14 @@
 			<div class="modal-header">
 				<!--Divide 2 tab for login and create account-->
 				<ul class="nav nav-tabs">
-					<li class="nav-item"><a class="nav-link active"
-						data-toggle="tab" href="#login">Login</a></li>
+					<security:authorize access="!isAuthenticated()">
+						<li class="nav-item"><a class="nav-link active"
+							data-toggle="tab" href="#login">Login</a></li>
+					</security:authorize>
+					<security:authorize access="isAuthenticated()">
+						<li class="nav-item"><a class="nav-link active"
+							data-toggle="tab" href="#userInfor">User Information</a></li>
+					</security:authorize>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab"
 						href="#create-user">Create User Account</a></li>
 				</ul>
@@ -92,73 +100,95 @@
 				</button>
 			</div>
 			<div class="tab-content">
-				<div class="tab-pane container active" id="login">
-					<div class="modal-body">
-						<div class="register-form">
-							<form action="#" method="post">
-								<div class="fields-grid">
-									<div class="styled-input">
-										<input type="email" placeholder="Your Email" name="Your Email">
+				<security:authorize access="!isAuthenticated()">
+					<div class="tab-pane container active" id="login">
+						<div class="modal-body">
+							<div class="register-form">
+								<form action="loginUser" method="post">
+									<p class="error">${loginError}</p>
+									<p class="sucess">${verifySucess}</p>
+									<p class="error">${loginRequire}</p>
+									<div class="fields-grid">
+										<div class="styled-input">
+											<input type="email" placeholder="Your Email" name="email" />
+										</div>
+										<div class="styled-input">
+											<input type="password" placeholder="Password" name="password" />
+										</div>
+										<div class="form-check">
+											<label class="form-check-label"> <input
+												type="checkbox" class="form-check-input" name="remember-me" />
+												Remember Me
+											</label>
+										</div>
+										<button type="submit" class="btn btn-secondary mt-3">Login</button>
 									</div>
-									<div class="styled-input">
-										<input type="password" placeholder="Password" name="password">
-									</div>
-									<button type="submit" class="btn btn-secondary">Login</button>
-								</div>
-							</form>
-						</div>
-					</div>
-					<!--Social Login-->
-					<div class="modal-footer ">
-						<div class="card-body">
-							<h5 class="card-title">Sign in using social provider</h5>
-							<div class="row">
-								<div class="col-lg-4">
-									<!--Add Facebook sign in button-->
-									<a href="#">
-										<button class="btn btn-primary">
-											<i class="fa fa-facebook-square"
-												style="font-size: 20px; color: white"></i> | Facebook Login
-										</button>
-									</a>
-								</div>
+								</form>
 							</div>
-							<div class="row mt-2">
-								<div class="col-lg-4">
-									<!--Add Facebook sign in button-->
-									<a href="#">
-										<button class="btn"
-											style="background-color: #1da1f2; color: white;">
-											<i class="fa fa-twitter-square"
-												style="font-size: 20px; color: white"></i> | Twitter Login
-										</button>
-									</a>
+						</div>
+						<!--Social Login-->
+						<div class="modal-footer ">
+							<div class="card-body">
+								<h5 class="card-title">Sign in using social provider</h5>
+								<div class="row">
+									<div class="col-lg-4">
+										<!--Add Facebook sign in button-->
+										<a href="#">
+											<button class="btn btn-primary">
+												<i class="fa fa-facebook-square"
+													style="font-size: 20px; color: white"></i> | Facebook Login
+											</button>
+										</a>
+									</div>
 								</div>
+								<div class="row mt-2">
+									<div class="col-lg-4">
+										<!--Add Facebook sign in button-->
+										<a href="#">
+											<button class="btn"
+												style="background-color: #1da1f2; color: white;">
+												<i class="fa fa-twitter-square"
+													style="font-size: 20px; color: white"></i> | Twitter Login
+											</button>
+										</a>
+									</div>
 
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</security:authorize>
+				<security:authorize access="isAuthenticated()">
+					<div class="tab-pane container active" id="userInfor">
+						<div class="modal-body">
+							<div class="register-form">
+								<form action="logout" method="post">
+									<button type="submit" class="btn btn-secondary mt-3">Logout</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</security:authorize>
 				<div class="tab-pane container fade" id="create-user">
 					<div class="modal-body">
 						<div class="register-form">
 							<form:errors path="notMatch" />
 							<form:form action="signup" method="post"
-								modelAttribute="userCommand">
+								modelAttribute="userSignupCommand">
 								<div class="fields-grid">
 									<div class="styled-input">
 										<form:input type="text" placeholder="First Name"
 											path="firstName" />
-										<form:errors path="firstName" cssClass="error"/>
+										<form:errors path="firstName" cssClass="error" />
 									</div>
 									<div class="styled-input">
 										<form:input type="text" placeholder="Last Name"
-											path="lastName"  />
-										<form:errors path="lastName" cssClass="error"/>
+											path="lastName" />
+										<form:errors path="lastName" cssClass="error" />
 									</div>
 									<div class="styled-input">
 										<form:input type="text" placeholder="Address" path="address" />
-										<form:errors path="address" cssClass="error"/>
+										<form:errors path="address" cssClass="error" />
 									</div>
 									<div class="styled-input">
 										<form:input type="email" placeholder="Your Email" path="email" />
@@ -167,14 +197,15 @@
 									<div class="styled-input">
 										<form:input type="password" placeholder="Password"
 											path="password" />
-										<form:errors path="password" />
+										<form:errors path="password" cssClass="error" />
 									</div>
 									<div class="styled-input">
 										<form:input type="password" placeholder="Retype Password"
 											path="retypePassword" />
-											<form:errors path="retypePassword" cssClass="error" />
-										
+										<form:errors path="retypePassword" cssClass="error" />
+
 									</div>
+
 									<button type="submit" class="btn btn-secondary">SIGN
 										UP</button>
 								</div>

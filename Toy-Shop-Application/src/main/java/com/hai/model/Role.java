@@ -2,7 +2,6 @@ package com.hai.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +24,7 @@ public class Role implements GrantedAuthority {
 	@Column(name="Role_Id")
 	private int id;
 	private String roleName;
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	@OneToMany(mappedBy="user")
 	private List<UserRole> users;
 	
 	//Getter and setter
@@ -54,5 +53,9 @@ public class Role implements GrantedAuthority {
 		return this.roleName;
 	}
 	
+	
+	public enum Roles{
+		ADMIN,USER,STORE_MANAGER;
+	}
 	
 }

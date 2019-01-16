@@ -2,7 +2,6 @@ package com.hai.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,12 +27,12 @@ public class UserRole {
 	private int id;
 	
 	//Map to Role
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name="Role_ID", nullable = false)
 	private Role role;
 	
 	//Map to User
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name="User_ID",nullable=false)
 	private Users user;
 	

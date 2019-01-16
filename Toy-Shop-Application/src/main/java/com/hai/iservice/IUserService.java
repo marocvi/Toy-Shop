@@ -1,6 +1,6 @@
 package com.hai.iservice;
 
-import com.hai.command.UserCommand;
+import com.hai.command.UserSignupCommand;
 import com.hai.model.Users;
 
 /**
@@ -15,7 +15,7 @@ public interface IUserService {
 	 * Create new User using userCommand Infromation 
 	 * @param userCommand
 	 */
-	public void createUser(UserCommand userCommand);
+	public void createUser(UserSignupCommand userCommand);
 	/**
 	 * Checking whether with particular email exist
 	 * @param email

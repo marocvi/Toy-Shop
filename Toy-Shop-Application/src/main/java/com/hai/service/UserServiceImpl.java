@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.hai.command.UserCommand;
+import com.hai.command.UserSignupCommand;
 import com.hai.exception.InvalidTokenException;
 import com.hai.exception.NotExistTokenException;
 import com.hai.idao.IUserDAO;
@@ -24,11 +24,12 @@ import com.hai.iservice.IUserRoleService;
 import com.hai.iservice.IUserService;
 import com.hai.iservice.IVerifyAccountTokenService;
 import com.hai.model.MyUserDetails;
+import com.hai.model.Role.Roles;
 import com.hai.model.Users;
 import com.hai.model.Users.LoginStatus;
 
 @Service
-public class UserServiceImpl implements UserDetailsService,IUserService {
+public class UserServiceImpl implements IUserService,UserDetailsService {
 	private final Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 
 	@Autowired
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserDetailsService,IUserService {
 	IUserRoleService userRoleService;
 
 	@Override
-	public void createUser(UserCommand userCommand) {
+	public void createUser(UserSignupCommand userCommand) {
 		LOGGER.info("Call create User");
 		Users user = new Users();
 		user.setFirstName(userCommand.getFirstName());
@@ -96,6 +97,8 @@ public class UserServiceImpl implements UserDetailsService,IUserService {
 				//Active User
 				user.setLoginStatus(LoginStatus.ACTIVE.toString());
 				user.setCreateDate(new Date());
+				//Create role for user;
+				userRoleService.saveUserRole(user,Roles.USER);
 				userDAO.updateUsers(user);
 			}
 		} catch (InvalidTokenException exInvalid) {

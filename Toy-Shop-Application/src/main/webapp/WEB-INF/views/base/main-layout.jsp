@@ -184,16 +184,50 @@
 	<script src="${js}/bootstrap.min.js"></script>
 	<!-- //bootstrap working-->
 	<script>
+	//Alert information
 	$(window).bind("load", function() { 
 		
-	
+		
 		if(${verifyError!=null}){
 			alert("${verifyError}");
 		}
-		else if(${verifySucess!=null}){
-			alert("${verifySucess}")
-		}
+		
+		
 	
+	})
+	//Show login modal
+	$(document).ready(function(){
+		 if(${verifySucess!=null}){
+			//show modal
+			$("#exampleModal").modal("show");
+			//Ative login tab
+			$('.nav-tabs a[href="#login"]').tab('show');	
+		}
+		else if(${loginError!=null}){
+			//show modal
+			$("#exampleModal").modal("show");
+			//Ative login tab
+			$('.nav-tabs a[href="#login"]').tab('show');	
+		}
+		else if(${logoutSucess!=null}){
+			//show modal
+			$("#exampleModal").modal("show");
+			//Ative login tab
+			$('.nav-tabs a[href="#login"]').tab('show');	
+		}
+		else if(${loginRequire!=null}){
+			//show modal
+			$("#exampleModal").modal("show");
+			//Ative login tab
+			$('.nav-tabs a[href="#login"]').tab('show');	
+		}
+		if(${signupError!=null}){
+			//show modal
+			$("#exampleModal").modal("show");
+			//Ative signup tab
+			$('.nav-tabs a[href="#create-user"]').tab('show');
+			
+		}
 	})
 		
 	</script>
