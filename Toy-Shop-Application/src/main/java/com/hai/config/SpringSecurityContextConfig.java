@@ -44,7 +44,7 @@ public class SpringSecurityContextConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		//Login config
-		  http.authorizeRequests()
+		  http.authorizeRequests().antMatchers("/admin*").authenticated().antMatchers("/normal*").permitAll()
           .and()
           .formLogin()
           .loginPage("/login?require")
@@ -52,7 +52,6 @@ public class SpringSecurityContextConfig extends WebSecurityConfigurerAdapter {
           .failureUrl("/login?error")
           .usernameParameter("email")
           .passwordParameter("password")
-          
           .and()
           .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
           .and()
@@ -62,6 +61,8 @@ public class SpringSecurityContextConfig extends WebSecurityConfigurerAdapter {
 		  http.authorizeRequests().and()
           .logout().deleteCookies("JSESSIONID").logoutSuccessUrl("/login?logout");
 		 //Spring social Config
+		  
+		  
 		  
 		  
 		  

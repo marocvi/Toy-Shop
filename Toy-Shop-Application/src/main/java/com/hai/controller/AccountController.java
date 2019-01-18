@@ -70,12 +70,11 @@ public class AccountController {
 		else if(error!= null) {
 			model.addAttribute("loginError","Your username and password are not correct");
 		}
+		else if(logout!=null) {
+			model.addAttribute("logoutSucess","You've logout sucessfully");
+		}
 		return "home";
 	}
-	@GetMapping(value="/logout")
-	public String logout(){
-		//Handle logout request
-		return "home";
-	}
+	
 
 }

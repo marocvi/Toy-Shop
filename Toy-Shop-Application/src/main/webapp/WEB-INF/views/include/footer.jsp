@@ -108,6 +108,7 @@
 									<p class="error">${loginError}</p>
 									<p class="sucess">${verifySucess}</p>
 									<p class="error">${loginRequire}</p>
+									<p class="sucess">${logoutSucess}</p>
 									<div class="fields-grid">
 										<div class="styled-input">
 											<input type="email" placeholder="Your Email" name="email" />
