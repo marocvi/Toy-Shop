@@ -2,8 +2,10 @@ package com.hai.model;
 
 import java.util.Date;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,8 +15,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name="Offer")
+@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 public class SpecialOffer {
 
 	
@@ -33,7 +40,7 @@ public class SpecialOffer {
 	private String link;
 	private String image;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="Product_ID")
 	private Product product;
 	public int getId() {

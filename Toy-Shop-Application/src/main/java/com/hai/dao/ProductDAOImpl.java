@@ -90,7 +90,7 @@ public class ProductDAOImpl implements IProductDAO{
 	public List<Product> readAllProducts() {
 		LOGGER.info("Call read all Products");
 		try {
-			return sessionFactory.getCurrentSession().createQuery("from Product").getResultList();
+			return sessionFactory.getCurrentSession().createQuery("from Product").setCacheable(true).getResultList();
 		}
 		catch(Exception e) {
 			LOGGER.error("Can't read all Products");

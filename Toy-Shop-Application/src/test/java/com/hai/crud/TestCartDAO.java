@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,11 @@ public class TestCartDAO {
 	
 	@Autowired
 	ICartDAO cartDAO ;
+	
+	@Autowired
+	SessionFactory sessionFactory;
 	 
-	@Test
+//	@Test
 	public void testCreate() {
 		Cart cart = new Cart();
 		cart.setMoneyTotal(14);
@@ -36,14 +40,25 @@ public class TestCartDAO {
 		assertTrue(cartDAO.updateCart(cart));
 	}
 	
-//	@Test
+	@Test
 	public void testFindByID() {
-		assertNotNull(cartDAO.readCart(1));
+		assertNotNull(cartDAO.readCart(2));
+		assertNotNull(cartDAO.readCart(2));
+		assertNotNull(cartDAO.readCart(2));
 	}
 	
 //	@Test
 	public void testFindAll() {
-		assertEquals(2, cartDAO.readAllCarts().size());;
+		cartDAO.readAllCarts();
+		System.out.println("hai");
+		cartDAO.readAllCarts();
+		System.out.println("hai");
+		cartDAO.readAllCarts();
+		System.out.println("hai");
+		cartDAO.readAllCarts();
+		System.out.println("hai");
+		
+		
 	}
 	
 //	@Test
@@ -54,6 +69,7 @@ public class TestCartDAO {
 //	@Test
 	public void testDeleteCart() {
 		assertTrue(cartDAO.deleteCart(1));
+		
 	}
 	
 }

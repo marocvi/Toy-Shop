@@ -1,4 +1,5 @@
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <div class="header-outs" id="home">
 	<div class="header-bar">
 		<div class="info-top-grid">
@@ -70,7 +71,7 @@
 					</li>
 					<li class="nav-item"><a href="service.html" class="nav-link">Service</a>
 					</li>
-					<li class="nav-item"><a href="shop.html" class="nav-link">Shop
+					<li class="nav-item"><a href='<s:url value="/product"></s:url>' class="nav-link">Shop
 							Now</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"

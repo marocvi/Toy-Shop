@@ -6,7 +6,7 @@
 <html>
 <head>
 <c:url var="css" value="/resources/css/"></c:url>
-<c:url var="js" value="/resources/js/"></c:url>
+<c:url var="js" value="/resources/js"></c:url>
 <c:url var="image" value="/resources/images/"></c:url>
 <!-- Titles -->
 <title><tiles:getAsString name="title" /></title>
@@ -32,6 +32,7 @@
 <!--booststrap-->
 <link href="${css}/bootstrap.min.css" rel="stylesheet" type="text/css"
 	media="all">
+
 <!--//booststrap end-->
 <!-- font-awesome icons -->
 <link href="${css}/fontawesome-all.min.css" rel="stylesheet"
@@ -43,13 +44,20 @@
 <link rel="stylesheet" href="${css}/flexslider.css" type="text/css"
 	media="all" />
 <!--flexs slider-->
-<link href="${css}/JiSlider.css" rel="stylesheet">
+
 <!--Shoping cart-->
 <link rel="stylesheet" href="${css}/shop.css" type="text/css" />
 <!--//Shoping cart-->
 <!--stylesheets-->
 <link href="${css}/style.css" rel='stylesheet' type='text/css'
 	media="all">
+<link href="${css}/jquery-ui1.css" rel="stylesheet" type="text/css">
+<link href="${css}/checkout.css" rel="stylesheet" type="text/css">
+<link href="${css}/creditly.css" rel="stylesheet" type="text/css">
+<link href="${css}/easy-responsive-tabs.css" rel="stylesheet"
+	type="text/css">
+<link href="${css}/shop.css" rel="stylesheet" type="text/css">
+
 <!--//stylesheets-->
 <link href="//fonts.googleapis.com/css?family=Sunflower:500,700"
 	rel="stylesheet">
@@ -73,9 +81,13 @@
 
 	<!--js working-->
 	<script src='${js}/jquery-2.2.3.min.js'></script>
+	<script src='${js}/creditly.js'></script>
+	<script src='${js}/easy-responsive-tabs.js'></script>
+	<script src='${js}/imagezoom.js'></script>
+	<script src='${js}/jquery-ui.js'></script>
+	<script src='${js}/jquery.flexslider.js'></script>
 	<!--//js working-->
 
-	</script>
 	<!-- cart-js -->
 	<script src="${js}/minicart.js"></script>
 	<script>
@@ -229,6 +241,79 @@
 			
 		}
 	})
+	
+	
+		
+	</script>
+	<!--ShopNow-->
+	<!--//js working-->
+	<script>
+         toys.render();
+
+         toys.cart.on('toys_checkout', function (evt) {
+         	var items, len, i;
+
+         	if (this.subtotal() > 0) {
+         		items = this.items();
+
+         		for (i = 0, len = items.length; i < len; i++) {}
+         	}
+         });
+      </script>
+	<script>
+         //<![CDATA[
+         $(window).load(function () {
+         	$("#slider-range").slider({
+         		range: true,
+         		min: 0,
+         		max: 2000,
+         		values: [${filterCommand.minPrice}, ${filterCommand.maxPrice}],
+         		slide: function (event, ui) {
+         			$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+         			$("#minPrice").val( ui.values[0]);
+         			$("#maxPrice").val( ui.values[1]);
+         		}
+         	});
+         	$("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+
+         }); //]]>
+      </script>
+	<!-- //price range (top products) -->
+	<script>
+         jQuery(document).ready(function ($) {
+         	$(".scroll").click(function (event) {
+         		event.preventDefault();
+         		$('html,body').animate({
+         			scrollTop: $(this.hash).offset().top
+         		}, 900);
+         	});
+         });
+      </script>
+	<!-- start-smoth-scrolling -->
+	<!-- here stars scrolling icon -->
+	<script>
+         $(document).ready(function () {
+
+         	var defaults = {
+         		containerID: 'toTop', // fading element id
+         		containerHoverID: 'toTopHover', // fading element hover id
+         		scrollSpeed: 1200,
+         		easingType: 'linear'
+         	};
+
+
+         	$().UItoTop({
+         		easingType: 'easeOutQuart'
+         	});
+
+         });
+        	
+      </script>
+	<!-- //here ends scrolling icon -->
+	<!--bootstrap working-->
+	<!-- //bootstrap working-->
+	<!-- //OnScroll-Number-Increase-JavaScript -->
+	<script type="text/javascript">
 		
 	</script>
 </body>

@@ -3,7 +3,9 @@ package com.hai.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,14 +16,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "Product")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Product {
 
 	@Id
@@ -31,14 +38,10 @@ public class Product {
 	@Column(name = "Product_Name")
 	private String name;
 	private int stock;
-	private String size;
-	private String color;
 	@Column(columnDefinition = "TEXT")
 	private String description;
-	@Column(name = "image_name")
-	private String listOfImages;
 	private String brand;
-	@Column(name = "profile_image")
+	@Column(name = "Profile_Image")
 	private String profileImage;
 	private long view;
 	@Column(name = "Import_Date")
@@ -46,23 +49,38 @@ public class Product {
 	private Date importDate;
 	private int rate;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+	@JoinColumn(name = "Category_ID")
+	private Category category;
+
+	// Map to Product_Size
+	@OneToMany(mappedBy = "product")
+	private List<ProductSize> productSizes;
+
+	// Map to Product_ Image
+	@OneToMany(mappedBy = "product")
+	private List<ProductImage> productImages;
 
 	// Map to Promotion
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-	private List<Promotion> promotions;
+	@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	private Set<Promotion> promotions;
 
-	// Map to Special Offer
-	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-	private SpecialOffer offer;
+////	 Map to Special Offer
+//	@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+//	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	private SpecialOffer offer;
 
 	// Map to Supplier
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "Product_Supplier", joinColumns = @JoinColumn(name = "Product_ID", nullable = false), inverseJoinColumns = @JoinColumn(name = "Supplier_ID", nullable = false))
 	private List<Supplier> suppliers;
 
-	// Map to List
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private List<Price> prices;
+	// Map to ProductPrice
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+	private Set<ProductPrice> productPrices;
 
 	// Map to wishlist
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
@@ -85,8 +103,9 @@ public class Product {
 	private List<ImportDetail> importDetails;
 
 	// Map to Review
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "product")
-	private List<Review> review;
+	@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "product", fetch = FetchType.EAGER)
+	private Set<Review> reviews;
 
 	// Getter and setter
 	public List<ExportDetail> getExportDetails() {
@@ -137,36 +156,12 @@ public class Product {
 		this.suppliers = suppliers;
 	}
 
-	public List<Price> getPrices() {
-		return prices;
-	}
-
-	public void setPrices(List<Price> prices) {
-		this.prices = prices;
-	}
-
 	public int getStock() {
 		return stock;
 	}
 
 	public void setStock(int stock) {
 		this.stock = stock;
-	}
-
-	public String getSize() {
-		return size;
-	}
-
-	public void setSize(String size) {
-		this.size = size;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
 	}
 
 	public String getDescription() {
@@ -193,14 +188,6 @@ public class Product {
 		this.cartDetails = cartDetails;
 	}
 
-	public String getListOfImages() {
-		return listOfImages;
-	}
-
-	public void setListOfImages(String listOfImages) {
-		this.listOfImages = listOfImages;
-	}
-
 	public String getProfileImage() {
 		return profileImage;
 	}
@@ -208,8 +195,6 @@ public class Product {
 	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
 	}
-
-
 
 	public String getBrand() {
 		return brand;
@@ -235,21 +220,14 @@ public class Product {
 		this.importDate = importDate;
 	}
 
-	public SpecialOffer getOffer() {
-		return offer;
-	}
-
-	public void setOffer(SpecialOffer offer) {
-		this.offer = offer;
-	}
-
-	public List<Promotion> getPromotions() {
+	public Set<Promotion> getPromotions() {
 		return promotions;
 	}
 
-	public void setPromotions(List<Promotion> promotions) {
+	public void setPromotions(Set<Promotion> promotions) {
 		this.promotions = promotions;
 	}
+
 	public int getRate() {
 		return rate;
 	}
@@ -258,14 +236,44 @@ public class Product {
 		this.rate = rate;
 	}
 
-	public List<Review> getReview() {
-		return review;
+	public Set<Review> getReviews() {
+		return reviews;
 	}
 
-	public void setReview(List<Review> review) {
-		this.review = review;
+	public void setReviews(Set<Review> reviews) {
+		this.reviews = reviews;
 	}
-	
 
+	public List<ProductSize> getProductSizes() {
+		return productSizes;
+	}
+
+	public void setProductSizes(List<ProductSize> productSizes) {
+		this.productSizes = productSizes;
+	}
+
+	public List<ProductImage> getProductImages() {
+		return productImages;
+	}
+
+	public void setProductImages(List<ProductImage> productImages) {
+		this.productImages = productImages;
+	}
+
+	public Set<ProductPrice> getProductPrices() {
+		return productPrices;
+	}
+
+	public void setProductPrices(Set<ProductPrice> productPrices) {
+		this.productPrices = productPrices;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 }

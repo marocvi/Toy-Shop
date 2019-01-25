@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.3" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+  http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_3.xsd">
+	<tlib-version>1.0</tlib-version>
+	<short-name>taglib</short-name>
+	<function>
+		<name>promotionRate</name>
+		<function-class>com.hai.tag.DiscountTag</function-class>
+		<function-signature>
+			int getPromotionRate(java.util.Set)
+		</function-signature>
+	</function>
+	<function>
+		<name>reviewRate</name>
+		<function-class>com.hai.tag.ReviewTag</function-class>
+		<function-signature>
+			int getReviewRate(java.util.Set)
+		</function-signature>
+	</function>
+	<uri>CustomTag</uri>
+	
+	<tag>
+		<description>current price</description>
+		<name>currentPrice</name>
+		<tag-class>com.hai.tag.PriceTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>productPrices</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>promotionRate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

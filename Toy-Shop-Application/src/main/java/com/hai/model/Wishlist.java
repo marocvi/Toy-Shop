@@ -3,6 +3,7 @@ package com.hai.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="WishList")
-//TODO add check here, check for guest_id and user_id are null at the same time
+//add check here, check for guest_id and user_id are null at the same time
 public class Wishlist {
 
 	@Id
@@ -21,13 +22,13 @@ public class Wishlist {
 	private int id;
 	
 	//Mapp to Product
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="Product_ID", nullable = false )
 	private Product product;
 	
 	
 	//Mapp to User
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="User_ID")
 	private Users user;
 

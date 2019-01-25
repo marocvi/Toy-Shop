@@ -90,7 +90,7 @@ public class CategoryDAOImpl implements ICategoryDAO{
 	public List<Category> readAllCategorys() {
 		LOGGER.info("Call read all Categorys");
 		try {
-			return sessionFactory.getCurrentSession().createQuery("from Category").getResultList();
+			return sessionFactory.getCurrentSession().createQuery("from Category").setCacheable(true).getResultList();
 		}
 		catch(Exception e) {
 			LOGGER.error("Can't read all Categorys");

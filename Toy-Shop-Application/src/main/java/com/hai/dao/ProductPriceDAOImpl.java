@@ -15,25 +15,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hai.idao.IPriceDAO;
-import com.hai.model.Price;
+import com.hai.idao.IProductPriceDAO;
+import com.hai.model.ProductPrice;
 
-@Repository("PriceDAO")
-public class PriceDAOImpl implements IPriceDAO{
-	private Logger LOGGER = Logger.getLogger(PriceDAOImpl.class);
+@Repository("ProductPriceDAO")
+public class ProductPriceDAOImpl implements IProductPriceDAO{
+	private Logger LOGGER = Logger.getLogger(ProductPriceDAOImpl.class);
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Override
 	@Transactional( rollbackFor= {Exception.class})
-	public boolean createPrice(Price price) {
-		LOGGER.info("Call create Price");
+	public boolean createProductPrice(ProductPrice price) {
+		LOGGER.info("Call create ProductPrice");
 		try {
 			sessionFactory.getCurrentSession().persist(price);
 			return true;
 		}
 		catch(Exception e) {
-			LOGGER.error("Can't create Price");
+			LOGGER.error("Can't create ProductPrice");
 			return false;
 			
 		}
@@ -41,45 +41,45 @@ public class PriceDAOImpl implements IPriceDAO{
 
 	@Override
 	@Transactional(readOnly=true)
-	public Price readPrice(int priceID) {
-		LOGGER.info("Call read Price");
+	public ProductPrice readProductPrice(int priceID) {
+		LOGGER.info("Call read ProductPrice");
 		try {
-			Price price = sessionFactory.getCurrentSession().get(Price.class, priceID);
+			ProductPrice price = sessionFactory.getCurrentSession().get(ProductPrice.class, priceID);
 			return price;
 		}
 		catch(Exception e) {
-			LOGGER.error("Can't read Price");
+			LOGGER.error("Can't read ProductPrice");
 			return null;
 		}
 	}
 
 	@Override
 	@Transactional( rollbackFor= {Exception.class})
-	public boolean updatePrice(Price price) {
-		LOGGER.info("Call update Price");
+	public boolean updateProductPrice(ProductPrice price) {
+		LOGGER.info("Call update ProductPrice");
 		try {
 			sessionFactory.getCurrentSession().update(price);
 			return true;
 		}
 		catch(Exception e) {
-			LOGGER.error("Can't update Price");
+			LOGGER.error("Can't update ProductPrice");
 			return false;
 		}
 	}
 
 	@Override
 	@Transactional( rollbackFor= {Exception.class})
-	public boolean deletePrice(int priceID) {
-		LOGGER.info("Call delete Price");
+	public boolean deleteProductPrice(int priceID) {
+		LOGGER.info("Call delete ProductPrice");
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Price> query = sessionFactory.getCurrentSession().createQuery("delete from Price where id=:priceID");
+			Query<ProductPrice> query = sessionFactory.getCurrentSession().createQuery("delete from ProductPrice where id=:priceID");
 			query.setParameter("priceID", priceID);
 			query.executeUpdate();
 			return true;
 		}
 		catch (Exception e) {
-			LOGGER.error("Can't delete Price");
+			LOGGER.error("Can't delete ProductPrice");
 			return false;
 		}
 	}
@@ -87,36 +87,36 @@ public class PriceDAOImpl implements IPriceDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly=true)
-	public List<Price> readAllPrices() {
-		LOGGER.info("Call read all Prices");
+	public List<ProductPrice> readAllProductPrices() {
+		LOGGER.info("Call read all ProductPrices");
 		try {
-			return sessionFactory.getCurrentSession().createQuery("from Price").getResultList();
+			return sessionFactory.getCurrentSession().createQuery("from ProductPrice").getResultList();
 		}
 		catch(Exception e) {
-			LOGGER.error("Can't read all Prices");
+			LOGGER.error("Can't read all ProductPrices");
 			return null;
 		}
 	}
 
 	@Override
 	@Transactional(readOnly=true)
-	public List<Price> readPriceByProperty(String name, Object value) {
-		LOGGER.info("Call read Price by property");
+	public List<ProductPrice> readProductPriceByProperty(String name, Object value) {
+		LOGGER.info("Call read ProductPrice by property");
 		try {
 			
 			Session currentSession = sessionFactory.getCurrentSession();
 			CriteriaBuilder builder =  currentSession.getCriteriaBuilder();
-			CriteriaQuery<Price> criteriaQuery = builder.createQuery(Price.class);
-			Root<Price> root = criteriaQuery.from(Price.class);
+			CriteriaQuery<ProductPrice> criteriaQuery = builder.createQuery(ProductPrice.class);
+			Root<ProductPrice> root = criteriaQuery.from(ProductPrice.class);
 			ParameterExpression<Object> param = builder.parameter(Object.class);
 			criteriaQuery.select(root).where(builder.equal(root.get(name), param));
 			
-			Query<Price> query = currentSession.createQuery(criteriaQuery);
+			Query<ProductPrice> query = currentSession.createQuery(criteriaQuery);
 			query.setParameter(param, value);
 			return query.getResultList();
 		}
 		catch(Exception e) {
-			LOGGER.error("Can't read Price by property");
+			LOGGER.error("Can't read ProductPrice by property");
 			LOGGER.error(e.getMessage());
 			return null;
 		}

@@ -39,6 +39,7 @@ public class HibernateConfig {
 	@Value("${hbm2ddl.auto}")
 	private String hbm2ddl;
 	
+	
 
 	@Bean
 	public DataSource getDataSource() {
@@ -64,12 +65,17 @@ public class HibernateConfig {
 		builder.scanPackages("com.hai.model");
 		return builder.buildSessionFactory();
 	}
+	
 	private Properties getProperties() {
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", dialect);
 		properties.put("hibernate.hbm2ddl.auto", hbm2ddl);
 		properties.put("hibernate.format_sql", formaSQL);
 		properties.put("hibernate.show_sql", showSQL);
+		//Enabling second-level caching
+		properties.put("hibernate.cache.use_second_level_cache", true);
+		properties.put("hibernate.cache.region.factory_class","org.hibernate.cache.ehcache.internal.EhcacheRegionFactory");
+		properties.put("hibernate.cache.use_query_cache", true);
 		return properties;
 	}
 

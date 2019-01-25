@@ -90,7 +90,7 @@ public class CartDAOImpl implements ICartDAO{
 	public List<Cart> readAllCarts() {
 		LOGGER.info("Call read all Carts");
 		try {
-			return sessionFactory.getCurrentSession().createQuery("from Cart").getResultList();
+			return sessionFactory.getCurrentSession().createQuery("from Cart").setCacheable(true).getResultList();
 		}
 		catch(Exception e) {
 			LOGGER.error("Can't read all Carts");

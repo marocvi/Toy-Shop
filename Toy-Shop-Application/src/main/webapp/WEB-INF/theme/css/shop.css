@@ -564,7 +564,7 @@ ul.stars li a:hover {
 }
 
 .search-hotel form input[type="submit"] {
-    background: url(../images/search.png) no-repeat 7px 6px #151414;
+    background: url(../../images/search.png) no-repeat 7px 6px #151414;
     width: 44px;
     height: 39px;
     border: none;
@@ -1154,8 +1154,8 @@ button.toys-cart {
 		width: 343px;
 	}
 	.add-review input[type="submit"] {
-    padding: 12px 0
-	 font-size: .9em;
+    padding: 12px 0;
+	 font-size: 0.9em;
 	}
    
 }
