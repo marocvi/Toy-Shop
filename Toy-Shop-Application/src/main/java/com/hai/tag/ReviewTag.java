@@ -12,7 +12,7 @@ public class ReviewTag {
 		if(reviews.size()==0) return 0;
 		double avgRate = 0.0;
 		for (Review review : reviews) {
-			avgRate+=review.getRate();
+			avgRate+=review.getReviewRate();
 		}
 		avgRate = avgRate/reviews.size();
 		if(avgRate>=1 && avgRate <1.5) return 1;
@@ -26,11 +26,11 @@ public class ReviewTag {
 	public static void main(String[] args) {
 		Set<Review> reviews  = new HashSet<>();
 		Review review1= new Review();
-		review1.setRate((byte) 1);
+		review1.setReviewRate((byte) 1);
 		Review review2= new Review();
-		review2.setRate((byte) 1);
+		review2.setReviewRate((byte) 1);
 		Review review3= new Review();
-		review3.setRate((byte) 1);
+		review3.setReviewRate((byte) 1);
 		reviews.add(review1);
 		reviews.add(review2);
 		reviews.add(review3);

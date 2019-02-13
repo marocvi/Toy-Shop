@@ -27,12 +27,11 @@ public class ProductServiceImpl implements IProductService {
 
 
 	@Override
-	public List<Product> getProductsByFilter(FilterCommand filter, int startIndex, int maxResult) {
+	public List<Product> getProductsByFilter(FilterCommand filter) {
 		LOGGER.info("Call Get list of products by filter");
 		List<Product> products = productDAO.readAllProducts();
 		// Check wether filter is empty
 		if (filter.isEmpty()) {
-			products = products.subList(startIndex, startIndex + maxResult);
 			return products;
 		} else {
 			// Apply price filter
@@ -56,12 +55,22 @@ public class ProductServiceImpl implements IProductService {
 		}
 
 		// Limit the result
-		if (startIndex + maxResult > products.size())
-			products = products.subList(startIndex, products.size());
-		else
-			products = products.subList(startIndex, startIndex + maxResult);
 		return products;
 
+	}
+
+
+
+	@Override
+	public Product getPrductById(int productId) {
+		return productDAO.readProduct(productId);
+	}
+
+
+
+	@Override
+	public boolean updateProduct(Product product) {
+		return productDAO.updateProduct(product);
 	}
 
 }

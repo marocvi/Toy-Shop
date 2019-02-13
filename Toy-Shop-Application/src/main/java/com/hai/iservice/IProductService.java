@@ -19,7 +19,22 @@ public interface IProductService {
 	 * @param filter
 	 * @return
 	 */
-	public List<Product> getProductsByFilter( FilterCommand filter,int startIndex, int maxResult);
+	public List<Product> getProductsByFilter( FilterCommand filter);
+	
+	/**
+	 * Using product id to look for product
+	 * @param productId
+	 * @return
+	 */
+	public Product getPrductById(int productId);
+	
+	
+	/**
+	 * This function is using for update to product
+	 * @param product
+	 * @return
+	 */
+	public boolean updateProduct(Product product);
 	
 	
 	

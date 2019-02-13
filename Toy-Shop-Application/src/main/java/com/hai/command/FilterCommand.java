@@ -119,7 +119,7 @@ public class FilterCommand {
 		int reviewRate=0;
 		//Get total mark of review Rate
 		for(Review review: product.getReviews()) {
-			reviewRate+=review.getRate();
+			reviewRate+=review.getReviewRate();
 		}
 		//Get average mark of review Rate
 		reviewRate /=product.getReviews().size();

@@ -4,6 +4,8 @@
 <%@ taglib prefix="cu" uri="CustomTag"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <s:url var="image" value="/resources/images/"></s:url>
+<s:url var="js" value="/resources/js/"></s:url>
+<c:set var="contextURL" value="${pageContext.request.contextPath}"></c:set>
 <!-- banner -->
 <div class="inner_page-banner one-img"></div>
 <!--//banner -->
@@ -32,7 +34,8 @@
 					</form>
 				</div>
 				<!-- price range -->
-				<form:form action="product" modelAttribute="filterCommand"
+
+				<form:form action="product?page=1" modelAttribute="filterCommand"
 					method="post">
 					<form:hidden path="minPrice" />
 					<form:hidden path="maxPrice" />
@@ -128,7 +131,7 @@
 						style="position: sticky; bottom: 0; z-index: 100;">
 						<a role="button" class="btn bg-dark border col-lg-6 text-light"
 							href='<c:url value="/product"></c:url>'>Delete Filter</a>
-						<button type="submit"
+						<button type="submit" id="submit"
 							class="btn bg-primary border col-lg-6 text-light">Apply
 							Filter</button>
 					</div>
@@ -200,8 +203,8 @@
 											class="img-thumbnail img-fluid" alt="">
 										<div class="men-cart-pro">
 											<div class="inner-men-cart-pro">
-												<a href="single.html" class="link-product-add-cart">Quick
-													View</a>
+												<a href='<c:url value="product/${product.id}" />'
+													class="link-product-add-cart">Quick View</a>
 											</div>
 										</div>
 										<span class="product-new-top">New</span>
@@ -228,15 +231,16 @@
 															</c:when>
 															<c:otherwise>
 																<span class="money ">$<cu:currentPrice
-																		productPrices="${product.productPrices}"/></span>
+																		productPrices="${product.productPrices}" /></span>
 															</c:otherwise>
 														</c:choose>
 
 													</div>
 												</div>
 												<ul class="stars">
-												
-													<c:forEach begin="1" end="${cu:reviewRate(product.reviews)}">
+
+													<c:forEach begin="1"
+														end="${cu:reviewRate(product.reviews)}">
 														<li><i class="fas fa-star"></i></li>
 													</c:forEach>
 												</ul>
@@ -260,12 +264,137 @@
 						</div>
 					</c:forEach>
 				</div>
-				<div class="d-flex justify-content-center mt-5">
+				<nav aria-label="Page navigation example ">
+					<ul class="pagination justify-content-center pt-5">
+						<li class="page-item "><a class="page-link" tabindex="-1"
+							id="pagePrevious" onclick="clickPrevious(${param.page})">Previous</a></li>
+						<c:forEach begin="1" end="${requestScope.numberOfPages}" var="i">
+							<c:choose>
+								<c:when test="${i==param.page}">
+									<li class="page-item active"><a id="click_page"
+										class="page-link " onclick="clickPage(${i })">${i }</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item "><a class="page-link "
+										onclick="clickPage(${i })" id="click_page">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<li class="page-item"><a class="page-link" id="pageNext"
+							onclick="clickNext(${param.page},${requestScope.numberOfPages})">Next</a></li>
+					</ul>
+				</nav>
+				<!-- Sumbit form filter by clicking page -->
+				<script type="text/javascript">
+					function clickPage(selectedPage) {
+						//Change action of form
+						$("#filterCommand").attr("action","product?page="+selectedPage);
+						//Submit
+						document.getElementById('submit').click();
+					}
+					function clickNext(selectedPage,numberOfPages) {
+						if(selectedPage<numberOfPages){
+							//Change action of form
+							var action = selectedPage+1
+							$("#filterCommand").attr("action","product?page="+action);
+							//Submit
+							document.getElementById('submit').click();
+						}
+					}
+					function clickPrevious(selectedPage){
+						if(selectedPage>1){
+						//Change action of form
+							var action = selectedPage-1
+							$("#filterCommand").attr("action","product?page="+action);
+							//Submit
+							document.getElementById('submit').click();
+						}
+					}
+				</script>
 
-					<button class="btn btn-success align-content-center">Show
-						more</button>
-				</div>
 			</div>
 		</div>
 	</div>
 </section>
+<!-- Js go here -->
+<!-- //Modal 1-->
+<!--js working-->
+<script src='${js}jquery-2.2.3.min.js'></script>
+<!--//js working-->
+<!-- cart-js -->
+<script src="${js}minicart.js"></script>
+<script>
+    toys.render();
+
+    toys.cart.on('toys_checkout', function (evt) {
+        var items, len, i;
+
+        if (this.subtotal() > 0) {
+            items = this.items();
+
+            for (i = 0, len = items.length; i < len; i++) {
+            }
+        }
+    });
+</script>
+<!-- //cart-js -->
+<!-- price range (top products) -->
+<script src="${js}jquery-ui.js"></script>
+<script>
+    //<![CDATA[
+     $(window).load(function () {
+         	$("#slider-range").slider({
+         		range: true,
+         		min: 0,
+         		max: 2000,
+         		values: [${filterCommand.minPrice}, ${filterCommand.maxPrice}],
+         		slide: function (event, ui) {
+         			$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+         			$("#minPrice").val( ui.values[0]);
+         			$("#maxPrice").val( ui.values[1]);
+         		}
+         	});
+         	$("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+
+         });  //]]>
+</script>
+<!-- //price range (top products) -->
+<!-- start-smoth-scrolling -->
+<script src="${js}move-top.js"></script>
+<script src="${js}easing.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 900);
+        });
+    });
+</script>
+<!-- start-smoth-scrolling -->
+<!-- here stars scrolling icon -->
+<script>
+    $(document).ready(function () {
+
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+
+
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<!-- //here ends scrolling icon -->
+<!--bootstrap working-->
+<script src="${js}bootstrap.min.js"></script>
+<!-- //bootstrap working-->
+<!-- //OnScroll-Number-Increase-JavaScript -->
+
+

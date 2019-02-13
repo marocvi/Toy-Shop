@@ -8,6 +8,7 @@
 	<definition name="mainLayout"
 		template="/WEB-INF/views/base/main-layout.jsp">
 		<put-attribute name="title" value="" />
+        <put-attribute name="static_resource" value=""/>
 		<put-attribute name="header"
 			value="/WEB-INF/views/include/header.jsp" />
 		<put-attribute name="banner" value="" />
@@ -46,13 +47,41 @@
 			value="/WEB-INF/views/main/product.jsp" />
 	</definition>
 
+     <!--Single Page-->
+	<definition name="single" extends="mainLayout">
+		<put-attribute name="title" value="Product Detail" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/single.jsp" />
+	</definition>
+	
+
 	<!-- Contact Page -->
-	<definition name="cotact" extends="mainLayout">
-		<put-attribute name="title" value="Product" />
+	<definition name="contact" extends="mainLayout">
+		<put-attribute name="title" value="Cotnact" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/main/contact.jsp" />
 	</definition>
 	
+	<!-- Checkout -->
+	<definition name="checkout" extends="mainLayout">
+		<put-attribute name="title" value="Checkout" />
+			<put-attribute name="body"
+			value="/WEB-INF/views/main/checkout.jsp" />
+		
+	</definition>
+
+
+    <!--Error Page-->
+	<definition name="error_404" extends="mainLayout">
+		<put-attribute name="title" value="Error" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/error/404.jsp" />
+	</definition>
 	
+	
+	
+
+    
+   
 
 </tiles-definitions>

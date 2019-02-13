@@ -32,11 +32,18 @@ public interface IUserService {
 	public String activateUser(String token);
 	
 	/**
-	 * This function using token to get Users
+	 * This function using token to get Users for activate user
 	 * @param token
 	 * @return
 	 */
 	public Users getUserByToken(String token);
+	
+	/**
+	 * This function using to get user from database using its id
+	 * @param productId
+	 * @return
+	 */
+	public Users getUserByEmail(String email);
 	
 	
 	

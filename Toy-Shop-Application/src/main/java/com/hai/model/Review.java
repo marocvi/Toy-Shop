@@ -22,7 +22,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "Review")
 @Cacheable
-@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Review {
 
 	@Id
@@ -34,24 +34,26 @@ public class Review {
 	@Column(name = "Created_Date")
 	private Date createDate;
 	private String image;
-	private byte rate;
-	@Column(name="User_Name")
-	private String userName;
+	@Column(name="Review_Rate")
+	private byte reviewRate;
+	@Column(name = "First_Name")
+	private String firstName;
+	@Column(name="Last_Name")
+	private String lastName;
+	private int likes;
+	private int dislikes;
+	private String email;
 
 	// Create foreign key
-	@ManyToOne(cascade = CascadeType.MERGE,fetch=FetchType.LAZY)
-	@JoinColumn(name = "User_ID", nullable = false)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name = "User_ID")
 	private Users user;
-	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name ="Product_ID",nullable= false)
+
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "Product_ID", nullable = false)
 	private Product product;
-	
-	
-	
-	
-	
-	//Getter and setter
+
+	// Getter and setter
 	public int getId() {
 		return id;
 	}
@@ -92,13 +94,6 @@ public class Review {
 		this.createDate = createDate;
 	}
 
-	public byte getRate() {
-		return rate;
-	}
-
-	public void setRate(byte rate) {
-		this.rate = rate;
-	}
 
 	public int getLikes() {
 		return likes;
@@ -116,14 +111,47 @@ public class Review {
 		this.product = product;
 	}
 
-	public String getUserName() {
-		return userName;
+
+	public int getDislikes() {
+		return dislikes;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setDislikes(int dislikes) {
+		this.dislikes = dislikes;
 	}
 
-	private int likes;
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public byte getReviewRate() {
+		return reviewRate;
+	}
+
+	public void setReviewRate(byte reviewRate) {
+		this.reviewRate = reviewRate;
+	}
+	
+	
 
 }

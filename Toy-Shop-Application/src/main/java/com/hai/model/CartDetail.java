@@ -17,10 +17,10 @@ public class CartDetail {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="Cart_Detail_ID")
 	private int id;
-	private double money;
 	private int amount;
 	private String color;
 	private String size;
+
 	
 	//Map to product
 	@ManyToOne
@@ -43,13 +43,6 @@ public class CartDetail {
 	}
 
 
-	public double getMoney() {
-		return money;
-	}
-
-	public void setMoney(double money) {
-		this.money = money;
-	}
 
 	public int getAmount() {
 		return amount;
@@ -90,6 +83,7 @@ public class CartDetail {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
+
 	
 	
 	

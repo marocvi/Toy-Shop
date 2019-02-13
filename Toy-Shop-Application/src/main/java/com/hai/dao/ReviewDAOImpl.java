@@ -33,7 +33,9 @@ public class ReviewDAOImpl implements IReviewDAO{
 			return true;
 		}
 		catch(Exception e) {
+			
 			LOGGER.error("Can't create Review");
+			e.printStackTrace();
 			return false;
 			
 		}

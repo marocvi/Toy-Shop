@@ -13,5 +13,16 @@ public class HomeController {
 	public String getHome(Model model) {
 		return "home";
 	}
-	
+	@RequestMapping(value="about")
+	public String getAbout() {
+		return "about";
+	}
+	@RequestMapping(value="service")
+	public String getService() {
+		return "service";
+	}
+	@RequestMapping(value="contact")
+	public String getContact() {
+		return "contact";
+	}
 }

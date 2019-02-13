@@ -1,5 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <div class="header-outs" id="home">
 	<div class="header-bar">
 		<div class="info-top-grid">
@@ -24,15 +26,15 @@
 				</div>
 				<div class="col-lg-5 col-md-6 search-right">
 					<form class="form-inline my-lg-0">
-						<input class="form-control mr-sm-2" type="search"
-							placeholder="Search">
-						<button class="btn" type="submit">Search</button>
+						<input class="form-control mr-sm-2" type="search" style="color:black;"
+							placeholder="Search" >
+						<button class="btn" type="submit" onclick="developmentAlert(event)">Search</button>
 					</form>
 				</div>
 				<div class="col-lg-4 col-md-3 right-side-cart">
 					<div class="cart-icons">
 						<ul>
-							<li><span class="far fa-heart"></span></li>
+							<li><span class="far fa-heart" onclick="developmentAlert(event)"></span></li>
 							<li>
 								<button type="button" data-toggle="modal"
 									data-target="#exampleModal" id="user">
@@ -65,33 +67,15 @@
 				id="navbarSupportedContent">
 				<ul class="navbar-nav ">
 					<li class="nav-item active"><a class="nav-link"
-						href="index.html">Home <span class="sr-only">(current)</span></a>
+						href='${contextURL}/home'>Home <span class="sr-only">(current)</span></a>
 					</li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a>
+					<li class="nav-item"><a href="${contextURL}/about" class="nav-link">About</a>
 					</li>
-					<li class="nav-item"><a href="service.html" class="nav-link">Service</a>
+					<li class="nav-item"><a href="${contextURL}/service" class="nav-link">Service</a>
 					</li>
-					<li class="nav-item"><a href='<s:url value="/product"></s:url>' class="nav-link">Shop
+					<li class="nav-item"><a href='${contextURL}/product?page=1' class="nav-link">Shop
 							Now</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> Pages </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="nav-link" href="icon.html">404 Page</a> <a
-								class="nav-link " href="typography.html">Typography</a>
-						</div></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown1"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> Product </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="nav-link" href="product.html">Kids Toys</a> <a
-								class="nav-link " href="product.html">Dolls</a> <a
-								class="nav-link " href="product.html">Key Toys</a> <a
-								class="nav-link " href="product.html">Boys Toys</a>
-						</div></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a>
+					<li class="nav-item"><a href="${contextURL}/contact" class="nav-link">Contact</a>
 					</li>
 				</ul>
 			</div>

@@ -28,7 +28,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "Product")
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Product {
 
 	@Id
@@ -50,9 +50,14 @@ public class Product {
 	private int rate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JoinColumn(name = "Category_ID")
 	private Category category;
+	
+	
+	//Map to Product_Color
+	@OneToMany(mappedBy="product")
+	private List<ProductColor> productColors;
 
 	// Map to Product_Size
 	@OneToMany(mappedBy = "product")
@@ -63,7 +68,7 @@ public class Product {
 	private List<ProductImage> productImages;
 
 	// Map to Promotion
-	@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Promotion> promotions;
 
@@ -79,7 +84,7 @@ public class Product {
 
 	// Map to ProductPrice
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<ProductPrice> productPrices;
 
 	// Map to wishlist
@@ -103,7 +108,7 @@ public class Product {
 	private List<ImportDetail> importDetails;
 
 	// Map to Review
-	@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "product", fetch = FetchType.EAGER)
 	private Set<Review> reviews;
 
@@ -275,5 +280,14 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
+	public List<ProductColor> getProductColors() {
+		return productColors;
+	}
+
+	public void setProductColors(List<ProductColor> productColors) {
+		this.productColors = productColors;
+	}
+	
 
 }

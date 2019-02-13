@@ -135,4 +135,11 @@ public class UserServiceImpl implements IUserService,UserDetailsService {
 		return userDetails;
 	}
 
+	@Override
+	public Users getUserByEmail(String email) {
+	
+		return userDAO.readByEmail(email);
+	}
+
+
 }

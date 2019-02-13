@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+<c:set var="contextURL" value="${pageContext.request.contextPath}"></c:set>
 <section class="subscribe">
 	<div class="container-fluid">
 		<div class="row">
@@ -104,7 +105,7 @@
 					<div class="tab-pane container active" id="login">
 						<div class="modal-body">
 							<div class="register-form">
-								<form action="loginUser" method="post">
+								<form action="${contextURL}/loginUser" method="post">
 									<p class="error">${loginError}</p>
 									<p class="sucess">${verifySucess}</p>
 									<p class="error">${loginRequire}</p>
@@ -163,7 +164,8 @@
 					<div class="tab-pane container active" id="userInfor">
 						<div class="modal-body">
 							<div class="register-form">
-								<form action="logout" method="post">
+								<p class="sucess"><s:message code="user.welcome"/></p>
+								<form action='${contextURL}/logout' method="post">
 									<button type="submit" class="btn btn-secondary mt-3">Logout</button>
 								</form>
 							</div>
@@ -213,8 +215,6 @@
 							</form:form>
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 		</div>

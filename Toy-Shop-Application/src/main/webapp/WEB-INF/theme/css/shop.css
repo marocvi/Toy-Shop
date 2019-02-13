@@ -989,7 +989,7 @@ color: #000;
 .add-review textarea{
     width: 100% !important;
     min-height: 120px;
-    margin: 1em 0;
+    margin-top:1em;
     resize: none;
 }
 .add-review input[type="text"]:nth-child(3){
